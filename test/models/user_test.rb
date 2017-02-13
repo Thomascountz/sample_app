@@ -62,4 +62,14 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
     end
   end
+  
+  test "should be invalid with a password less than 6 characters" do
+    @user.password = @user.password_confirmation = 'a' * 5
+    assert_not @user.valid?
+  end
+  
+  test "should be invalid with a blank password" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
 end
