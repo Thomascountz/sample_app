@@ -25,9 +25,16 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
   
-  # Returns remember token
+  # Saves an encrypted remember token into the database
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
+  
+  # Returns true if the given token matches the digest in the databse
+  def authenticated?(remember_token)
+    BCrypt::Password.new(self.remember_digest).is_password?(remember_token)
+  end
 end
+
+
