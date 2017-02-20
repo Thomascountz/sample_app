@@ -7,7 +7,7 @@ module SessionsHelper
   
   # Remembers the given user in a persistent session cookie
   def remember(user)
-    user.remember
+    user.remember # Saves an ecrypted remember_token into a User row in the database
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token 
   end
@@ -32,7 +32,7 @@ module SessionsHelper
   
   # Forgets a presistent session
   def forget(user)
-    user.forget
+    user.forget # Sets a User's remember_token to nil in the database
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
