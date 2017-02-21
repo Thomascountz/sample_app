@@ -20,11 +20,11 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_select 'div.field_with_errors'    
   end
   
-  test "valid update" do
-    log_in_as @user
+  test "valid update with friendly forwarding" do
     get edit_user_path(@user)
-    assert_template "users/edit"
-    
+    log_in_as @user
+    assert_redirected_to edit_user_url(@user)
+
     name = "King Henry"
     email = "yourking@valid.com"
     patch user_path(@user), params: { user: { name: name,
