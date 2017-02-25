@@ -43,7 +43,14 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     get edit_password_reset_path('wrong token', email: user.email)
     assert_redirected_to root_url
     
+    # Right email, expired token
+    @user.update_attribute(:reset_sent_at, 3.hours.ago)
+    get edit_password_reset_path(user.reset_token, email: user.email)
+    assert_redirected_to new_password_reset_url
+    assert_not flash.empty?
+    
     # Right email, right token
+    @user.update_attribute(:reset_sent_at, Time.zone.now)
     get edit_password_reset_path(user.reset_token, email: user.email)
     assert_template 'password_resets/edit'
     assert_select "input[name=email][type=hidden][value=?]", user.email
