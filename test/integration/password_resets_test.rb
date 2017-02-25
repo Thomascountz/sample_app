@@ -69,7 +69,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
                         password_confirmation: "" } }
     assert_select 'div#error_explaination'
 
-    # Valid password &confirmation
+    # Valid password & confirmation
     patch password_reset_path(user.reset_token),
       params: { email: user.email,
                 user: { password: "foobar",
@@ -77,6 +77,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert is_logged_in?
     assert_not flash.empty?
     assert_redirected_to user
+    assert user.reload.reset_digest.nil?
     
   end
   
