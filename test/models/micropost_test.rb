@@ -11,8 +11,18 @@ class MicropostTest < ActiveSupport::TestCase
     assert @micropost.valid?
   end
   
-  test "should not be valid" do
+  test "should not be valid without a user_id" do
     @micropost.user_id = nil
+    assert_not @micropost.valid?
+  end
+  
+  test "should not be valid without content" do
+    @micropost.content = "     "
+    assert_not @micropost.valid?
+  end
+  
+  test "should not be valid with content longer than 140 characters" do
+    @micropost.content = "a" * 141
     assert_not @micropost.valid?
   end
 end
