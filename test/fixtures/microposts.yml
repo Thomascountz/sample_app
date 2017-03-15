@@ -6,7 +6,7 @@ orange:
   user: thomas
 
 bedtime: 
-  content: "It's only 9:30 and it's my bedtime #grandpa"
+  content: "It is only 9:30 and it is my bedtime #grandpa"
   created_at: <%= 30.minutes.ago %>
   user: thomas
 
@@ -21,7 +21,7 @@ most_recent:
   user: thomas
   
 <% 30.times do |n| %>
-micropost_<% n %>:
+micropost_<%= n %>:
   content: <%= Faker::Lorem.sentence(5) %>
   created_at: <%= 42.days.ago %>
   user: thomas
