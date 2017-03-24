@@ -16,7 +16,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                           password: "foo",
                                           password_confirmation: "bar" } }
     assert_template 'users/edit'
-    assert_select 'div#error_explaination'
+    assert_select 'div#error_explanation'
     assert_select 'div.field_with_errors'    
   end
   
