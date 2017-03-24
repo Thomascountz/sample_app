@@ -26,3 +26,18 @@ micropost_<%= n %>:
   created_at: <%= 42.days.ago %>
   user: thomas
 <% end %>
+
+ants: 
+  content: "Oh, is this what you want? Because it's ants..."
+  created_at: <%= 2.years.ago %>
+  user: chris
+  
+zone: 
+  content: "Danger zone!"
+  created_at: <%= 3.days.ago %>
+  user: chris
+  
+tone: 
+  content: "You betta shut it. I don't like your tone."
+  created_at: <%= 10.minutes.ago %>
+  user: chris
